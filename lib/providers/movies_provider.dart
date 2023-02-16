@@ -11,7 +11,8 @@ class MoviesProvider extends ChangeNotifier {
   distintos end points en formato JSON
    */
   final String _baseUrl = 'api.themoviedb.org'; //API del Provider
-  String _apiKey = '6806871fddc11734d8766d24c4b7cefc'; //Token de validación
+  final String _apiKey =
+      '6806871fddc11734d8766d24c4b7cefc'; //Token de validación
   final String _language = 'es-ES';
   final String _page = '1';
 
