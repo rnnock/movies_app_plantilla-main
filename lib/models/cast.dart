@@ -14,7 +14,7 @@ class Cast {
     required this.creditId,
     required this.order,
     required this.castId,
-    required this.department,
+    this.department,
     required this.job,
   });
 
@@ -47,7 +47,7 @@ class Cast {
         adult: json["adult"],
         gender: json["gender"],
         id: json["id"],
-        knownForDepartment: json["known_for_department"]!,
+        knownForDepartment: json["known_for_department"],
         name: json["name"],
         originalName: json["original_name"],
         popularity: json["popularity"]?.toDouble(),
@@ -56,7 +56,7 @@ class Cast {
         character: json["character"],
         creditId: json["credit_id"],
         order: json["order"],
-        department: json["department"]!,
+        department: json["department"],
         job: json["job"],
       );
 }
