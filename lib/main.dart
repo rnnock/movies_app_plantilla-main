@@ -11,7 +11,8 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => MoviesProvider(),
+          create: (_) =>
+              MoviesProvider(), //Creación de la primera instancia de MoviesProvider, que hará la petición http para almacenar las películas a mostrar en la App
           lazy: false,
         ),
       ],

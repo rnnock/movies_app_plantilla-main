@@ -1,5 +1,9 @@
-import 'models.dart';
+//Clase NowPlayingResponse que da formato al objeto JSON recibido para poder mapear sus atributos y poder así llenar la App con las películas que actualmente están en cartelera
+//Se crean las distintas clases con sus métodos setter y getter de los objetos recibidos
 
+import 'models.dart'; //Haciendo un único import, se reciben todos los exports del fichero models.dart
+
+//Clase principal con su método constructor
 class NowPlayingResponse {
   NowPlayingResponse({
     required this.dates,
@@ -8,10 +12,11 @@ class NowPlayingResponse {
     required this.totalPages,
     required this.totalResults,
   });
-
+//variables locales de clase
   Dates dates;
   int page;
-  List<Movie> results;
+  List<Movie>
+      results; // Variable que almacena todas las peliculas recibidas en la llamada http
   int totalPages;
   int totalResults;
 

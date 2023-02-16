@@ -26,16 +26,18 @@ class Movie {
   String originalTitle;
   String overview;
   double popularity;
-  String? posterPath;
+  String?
+      posterPath; //Variable opcional porque puede haber películas sin carátulas
   DateTime releaseDate;
   String title;
   bool video;
   double voteAverage;
   int voteCount;
 
+//Getter para obtener la imagen de carátula para mostrar. Se comprueba que la variable posterPath contiene una imagen, en caso contrario se le asigna una imagen por defecto
   get fullPosterPath {
     if (this.posterPath != 0) {
-      return 'https://image.tmdb.org/t/p/w500${posterPath}';
+      return 'https://image.tmdb.org/t/p/w500${posterPath}'; //Se concatena el inicio de la URL con la variable 'posterPath' para hacer el método dinámico
     } else {
       return 'https://i.stack.imgur.com/GNhxO.png';
     }

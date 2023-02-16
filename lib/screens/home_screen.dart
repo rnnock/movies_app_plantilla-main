@@ -7,6 +7,7 @@ import '../providers/movies_provider.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //Asignación de la instancia de Provider a la variable final moviesProvider. Se indica que es de tipo 'MoviesProvider' creada en el main, para saber qué instancia debe ser asignada
     final moviesProvider = Provider.of<MoviesProvider>(context);
 
     return Scaffold(
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               // Targetes principals
+              //LLamada al método onDisplayMovies para mostrar las portadas de las películas que actualmente están en cartelera
               CardSwiper(movies: moviesProvider.onDisplayMovies),
 
               // Slider de pel·licules

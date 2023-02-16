@@ -1,3 +1,5 @@
+//Fichero creado para hacer todos los imports en una sola línea, con el fin de estructurar y reducir el código un poco.
+
 export 'dart:convert';
 
 export 'package:movies_app/models/cast.dart';
