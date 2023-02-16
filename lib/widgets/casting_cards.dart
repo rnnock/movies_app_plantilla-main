@@ -10,17 +10,18 @@ class CastingCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+
     return FutureBuilder(
       future: moviesProvider.getMovieCast(idMovie),
       builder: (BuildContext context, AsyncSnapshot<List<Cast>> snapshot) {
         if (!snapshot.hasData) {
           return Container(
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(),
             ),
           );
         }
-        final casting = snapshot.data!;
+        final List<Cast> casting = snapshot.data!; //Siempre tendrá valor
 
         return Container(
           margin: const EdgeInsets.only(bottom: 30),
@@ -28,7 +29,7 @@ class CastingCards extends StatelessWidget {
           height: 180,
           // color: Colors.red,
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: casting.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) =>
                 _CastCard(casting[index]),
@@ -55,7 +56,7 @@ class _CastCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
-              placeholder: AssetImage('assets/no-image.jpg'),
+              placeholder: const AssetImage('assets/no-image.jpg'),
               image: NetworkImage(myCast.fullProfilePath),
               height: 140,
               width: 100,
