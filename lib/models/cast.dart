@@ -1,5 +1,11 @@
+/* 
+Clase Cast con sus métodos que es invocada desde cualquier Widget con el fin de encapsular
+sus atributos y métodos y estructurar mejor el código, favoreciendo su mantenimento.
+*/
+
 import 'models.dart';
 
+//Método constructor
 class Cast {
   Cast({
     required this.adult,
@@ -18,14 +24,17 @@ class Cast {
     required this.job,
   });
 
+//Método getter que devuelve el String con la imagen de los actores que intervienen en una película determinada
   get fullProfilePath {
-    if (this.profilePath != 0) {
-      return 'https://image.tmdb.org/t/p/w500${profilePath}';
+    if (profilePath != 0) {
+      return 'https://image.tmdb.org/t/p/w500$profilePath';
     } else {
+      //Si la consulta no contiene la imagen del actor, se muestra una imagen por defecto.
       return 'https://i.stack.imgur.com/GNhxO.png';
     }
   }
 
+//Zona de declaración de atributos de la clase (obtenidos del cuerpo del JSON)
   bool adult;
   int gender;
   int id;
@@ -41,6 +50,7 @@ class Cast {
   String? department;
   String? job;
 
+//Métodos fromJson y fromMap para mapear el cuerpo del JSON obtenido
   factory Cast.fromJson(String str) => Cast.fromMap(json.decode(str));
 
   factory Cast.fromMap(Map<String, dynamic> json) => Cast(

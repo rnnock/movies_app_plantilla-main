@@ -1,5 +1,11 @@
+/* 
+Clase Movie con sus métodos, que es invocada desde cualquier Widget con el fin de encapsular
+sus atributos y métodos y estructurar mejor el código, favoreciendo su mantenimento.
+*/
+
 import 'models.dart';
 
+//Método constructor
 class Movie {
   Movie({
     required this.adult,
@@ -18,6 +24,7 @@ class Movie {
     required this.voteCount,
   });
 
+//Zona de declaración de atributos de la clase (obtenidos del cuerpo del JSON)
   bool adult;
   String backdropPath;
   List<int> genreIds;
@@ -34,15 +41,21 @@ class Movie {
   double voteAverage;
   int voteCount;
 
-//Getter para obtener la imagen de carátula para mostrar. Se comprueba que la variable posterPath contiene una imagen, en caso contrario se le asigna una imagen por defecto
+/*
+ Getter para obtener la imagen de carátula para mostrar. Se comprueba que la variable
+ posterPath contiene una imagen, en caso contrario se le asigna una imagen por defecto
+ */
   get fullPosterPath {
-    if (this.posterPath != 0) {
-      return 'https://image.tmdb.org/t/p/w500${posterPath}'; //Se concatena el inicio de la URL con la variable 'posterPath' para hacer el método dinámico
+    if (posterPath != 0) {
+      //Se concatena el inicio de la URL con la variable 'posterPath' para hacer el método dinámico
+      return 'https://image.tmdb.org/t/p/w500$posterPath';
     } else {
+      //Se devuelve una imagen por defecto en caso de que no haya carátula para mostrar.
       return 'https://i.stack.imgur.com/GNhxO.png';
     }
   }
 
+//Métodos fromJson y fromMap para mapear el cuerpo del JSON obtenido
   factory Movie.fromJson(String str) => Movie.fromMap(json.decode(str));
 
   factory Movie.fromMap(Map<String, dynamic> json) => Movie(

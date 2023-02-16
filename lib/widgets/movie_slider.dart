@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
+/*
+Clase que contiene un Widget de tipo ListView que se utiliza para mostrar en la App las
+carátulas de las películas más populares.
+*/
 
+import 'package:flutter/material.dart';
 import '../models/models.dart';
 
 class MovieSlider extends StatelessWidget {
@@ -10,34 +14,43 @@ class MovieSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    if (this.movies.length == 0) {
+
+    /*
+    Eliminamos el bug inicial para que en lugar de salir el mensaje de error, salga un CircularProgressIndicator
+    y así mejorar la apariencia para el usuario.
+    */
+    if (movies.length == 0) {
       return Container(
         width: double.infinity,
         height: size.height * 0.5,
-        child: Center(
+        child: const Center(
           child: CircularProgressIndicator(),
         ),
       );
     }
+
+    //Creación del ListView que mostrará las imagenes de las películas.
     return Container(
       width: double.infinity,
       height: 260,
-      // color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text('Populars',
+            child: Text('Populares',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Expanded(
+            //Método constructor nombrado
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: movies.length,
+                itemCount: movies.length, //Tamaño de la List<Movie>
+
+                //Llamada al método privado _MoviePoster para la película del index
                 itemBuilder: (_, int index) =>
                     _MoviePoster(myMovie: movies[index])),
           )
@@ -47,28 +60,32 @@ class MovieSlider extends StatelessWidget {
   }
 }
 
+//Creación del ClipRRect que mostrará las imagenes de las películas.
 class _MoviePoster extends StatelessWidget {
   final Movie myMovie;
 
-  const _MoviePoster({super.key, required this.myMovie});
+  const _MoviePoster({required this.myMovie});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 130,
       height: 190,
-      // color: Colors.green,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
+          //Al pulsar sobre una imagen, se navega a la pantalla de detalles de esa película
           GestureDetector(
             onTap: () =>
                 Navigator.pushNamed(context, 'details', arguments: myMovie),
+
+            //Se da formato y se rellenan las tarjetas con las imagenes correspondientes
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage(myMovie.fullPosterPath),
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(myMovie
+                    .fullPosterPath), //Llamada al método getter para obtener la imagen de la película
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
@@ -79,7 +96,7 @@ class _MoviePoster extends StatelessWidget {
             height: 5,
           ),
           Text(
-            myMovie.title,
+            myMovie.title, //Titulo de la película con el método getter
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
